@@ -2,7 +2,10 @@
 clear
 
 WORKING_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
+if [[ ! -d VirtualboxVMs ]]; then
+    # Making a directory for all the vagrant files
+    mkdir VirtualboxVMs
+fi
 echo "enter 1 to create VM"
 echo "enter 2 to edit current vm"
 echo "enter 3 to delete a vm"
