@@ -1,0 +1,24 @@
+#-*- mode: ruby -*-
+# vi: set ft=ruby :
+
+$script = <<-SCRIPT
+sudo yum -y install git
+#route add default gw 172.16.28.1
+SCRIPT
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "bento/centos-7.3"
+
+   config.vm.define "$VM_NAME" do |vm_config_1|
+    vm_config_1.vm.hostname = "$VM_NAME"
+    vm_config_1.vm.network :private_network, ip: "$VM_IP", netmask: "255.255.254.0"
+    vm_config_1.disksize.size = '$DISK'
+    vm_config_1.vm.provision "shell",
+    run: "always",
+    inline: "$script"
+    vm_config_1.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", "$RAM"]
+      v.customize ["modifyvm", :id, "--cpus", "$CPU_NUM"]
+end
+end
+end
