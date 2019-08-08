@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
 
    config.vm.define "$VM_NAME" do |vm_config_1|
     vm_config_1.vm.hostname = "$VM_NAME"
-    vm_config_1.vm.network :private_network, ip: "$VM_IP", netmask: "255.255.254.0"
+    vm_config_1.vm.network :private_network, ip: "$VM_IP", netmask: "255.255.254.0", use_dhcp_assigned_default_route: true, bridge: "bond0"
     vm_config_1.disksize.size = '$DISK'
     vm_config_1.vm.provision "shell",
     run: "always",
