@@ -18,8 +18,8 @@ done
       read -p "enter the VM name: " VM_NAME
       read -p "enter the server IP: " VM_IP
       read -p "enter the number of CPU: " CPU_NUM
-      read -p "enter the ram required :" RAM
-      read -p "enter the disk size:" DISK
+      read -p "enter the ram required in MB:" RAM
+      read -p "enter the disk size in GB:" DISK
       mkdir VirtualboxVMs/$VM_NAME
       cp Vagrant.txt VirtualboxVMs/$VM_NAME/Vagrantfile
       cd VirtualboxVMs/$VM_NAME
@@ -30,7 +30,7 @@ done
       echo "RAM=$RAM" >> properties.txt
       echo "DISK=$DISK" >> properties.txt
 
-      python3.7 ${WORKING_DIR}/change_config.py properties.txt Vagrantfile
+      python2.7 ${WORKING_DIR}/change_config.py properties.txt Vagrantfile
 
       vagrant up
       cd ../..
